@@ -14,16 +14,16 @@
 > > ![double] X coordinate.  
 > > ![double] Y coordinate.  
 > > ![double] Z coordinate.  
->  
+>
 > ![list] `Motion`: Velocity of the entity in meters per tick.  
 > > ![double] X component.  
 > > ![double] Y component.  
 > > ![double] Z component.  
->  
+>
 > ![list] `Rotation`: Rotation of the entity.  
 > > ![float] Clockwise rotation around Y axis (yaw).  
 > > ![float] Declination from the horizon around X axis (pitch).  
->  
+>
 > ![float] `FallDistance`: Distance in meters the entity has fallen. Determines fall damage.  
 > ![short] `Fire`: Ticks remaining while the entity is on fire.  
 > ![short] `Air`: Ticks remaining of breath while the entity is underwater.  
@@ -40,7 +40,7 @@
 > ![list] `Passengers`: List of entity compounds that are riding on this entity.  
 > ![byte] `Glowing`: If true, the entity will show a glowing outline.  
 > ![list] `Tags`: List of custom strings.  
-  
+
 ### Mob/Player  
 > ![float] `Health`: Amount of health the mob has, in half-hearts.  
 > ![float] `AbsorptionAmount`  
@@ -52,29 +52,29 @@
 > > > ![string] `Name`: The attribute ID.  
 > > > ![double] `Base`: The default value.  
 > > > ![list] `Modifiers`: List of active modifiers.  
->  
+>
 > ![list] `ActiveEffects`: List of active status effects.  
->  
+>
 > ![list] `HandItems`: Items in the mob's hands.  
 > > ![compound] Item in the mob's main hand.  
 > > ![compound] Item in the mob's off hand.  
->  
+>
 > ![list] `ArmorItems`: Items in the mob's armor slots.  
 > > ![compound] Item in the mob's feet slot.  
 > > ![compound] Item in the mob's legs slot.  
 > > ![compound] Item in the mob's chest slot.  
 > > ![compound] Item in the mob's head slot.  
->  
+>
 > ![list] `HandDropChances`: Chances that hand items will drop on death.  
 > > ![float] Chance that the main hand item will drop.  
 > > ![float] Chance that the off hand item will drop.  
->  
+>
 > ![list] `ArmorDropChances`: Chances that armor items will drop on death.  
 > > ![float] Chance that the feet slot item will drop on death.  
 > > ![float] Chance that the legs slot item will drop on death.  
 > > ![float] Chance that the chest slot item will drop on death.  
 > > ![float] Chance that the head slot item will drop on death.  
->  
+>
 > ![string] `DeathLootTable`: ID of the loot table used for mob drops on death.  
 > ![long] `DeathLootTableSeed`: Seed for generating loot table results.  
 > ![byte] `CanPickUpLoot`: If true, the mob can equip weapons and armor from the ground.  
@@ -89,118 +89,119 @@
 > > ![int] `Y`: Y coordinate of the fence.  
 > > ![int] `Z`: Z coordinate of the fence.  
 
-### Breedable Mobs
+### Breedable Mobs  
 > ![int] `InLove`: Ticks remaining until the mob stops attempting to breed.  
 > ![int] `Age`: When positive, Ticks remaining until the mob can breed again. When negative, Ticks remaining until the mob becomes an adult.  
 > ![int] `ForcedAge`: The value `Age` will be set to when the mob becomes an adult.  
 > ![long] `LoveCauseMost`: Most significant UUID bits of the player that bred the mob.  
 > ![long] `LoveCauseLeast`: Least significant UUID bits of the player that bred the mob.  
 
-### Tameable Mobs
+### Tameable Mobs  
 > ![string] `OwnerUUID`: Hexadecimal UUID of the player that owns the mob.  
 > ![byte] `Sitting`: If true, the mob is sitting down.  
 
-### Horses, Donkeys, Mules, Llamas
+### Horses, Donkeys, Mules, Llamas  
 > ![byte] `EatingHaystack`: True when the mob is grazing.  
 > ![byte] `Tame`: If true, the mob has been tamed.  
 > ![int] `Temper`: Ease of taming. Increases when the mob is ridden or fed.  
 > ![string] `OwnerUUID`: Hexadecimal UUID of the player that owns the mob.  
 > ![compound] `SaddleItem`: The saddle item worn by the mob.  
 
-### Donkeys, Mules, LLamas
+### Donkeys, Mules, LLamas  
 > ![byte] `ChestedHorse`: If true, the mob is equipped with a chest.  
 > ![list] `Items`: List of items in the mob's inventory.  
 
-### Zombies, Zombie Villagers, Zombie Pigmen, Husks, Drowned
+### Zombies, Zombie Villagers, Zombie Pigmen, Husks, Drowned  
 > ![byte] `IsBaby`: True when the mob is a baby.  
 > ![byte] `CanBreakDoors`: If true, the mob can break wooden doors.  
 > ![byte] `DrownedConversionTime`: Ticks remaining until the mob transforms into a drowned.  
 
-### Bat
+### Bat  
 > ![byte] `BatFlags`: True when the bat is perched upside-down beneath a block.  
 
-### Chicken
+### Chicken  
 > ![byte] `IsChickenJockey`: If true, the chicken will despawn naturally and drop extra experience.  
 > ![int] `EggLayTime`: Ticks remaining until the chicken lays an egg.  
 
-### Creeper
+### Creeper  
 > ![byte] `Powered`: If true, the creeper is charged with lightning.  
 > ![byte] `ExplosionRadius`: Size of the creeper's explosion.  
 > ![short] `Fuse`: The value the internal fuse countdown will be set to when a target enters range.  
 > ![byte] `ignited`: True when the creeper was ignited with flint and steel.  
 
-### Ender Dragon
+### Ender Dragon  
 > ![int] `DragonPhase`: Current state of the dragon fight (`0` is circling, `1` is shooting a fireball, `2` is moving to the portal, `3` is landing on the portal, `4` is leaving the portal, `5` is shooting dragon breath, `6` is searching for a player, `7` is preparing dragon breath, `8` is charging a player, `9` is moving to the portal to die, `10` is hovering without AI).  
 
-### Enderman
+### Enderman  
 > ![compound] `carriedBlockState`: Block carried by the enderman.  
 
-### Endermite
+### Endermite  
 > ![int] `Lifetime`: Ticks the endermite has existed for.  
 
-### Evoker
+### Evoker  
 > ![int] `SpellTicks`: Ticks remaining until a spell can be cast.  
 
-### Ghast
+### Ghast  
 > ![int] `ExplosionPower`: Size of the fireball's explosion.  
 
-### Horse
+### Horse  
 > ![compound] `ArmorItem`: The horse armor item worn by the horse.  
 > ![int] `Variant`  
 
-### Illusioner
+### Illusioner  
 > ![int] `SpellTicks`: Ticks remaining until a spell can be cast.  
 
-### Llama
+### Llama  
 > ![int] `Variant`: Color of the llama (`0` is creamy beige, `1` is white, `2` is brown, `3` is gray).  
 > ![int] `Strength`: Strength of the llama. Affects inventory size and intimidation of wolves.  
 > ![compound] `DecorItem`: The carpet item worn by the llama.  
 
-### Magma Cube
+### Magma Cube  
 > ![int] `Size`: Size of the magma cube.  
 > ![byte] `wasOnGround`: True when the magma cube is touching the ground.  
 
-### Ocelot
+### Ocelot  
 > ![int] `CatType`: Type of the cat (`0` is wild, `1` is tuxedo, `2` is tabby, `3` is siamese).  
 
-### Parrot
+### Parrot  
 > ![int] `Variant`: Color of the parrot (`0` is red, `1` is blue, `2` is green, `3` is cyan, `4` is silver).  
 
-### Phantom
+### Phantom  
 > ![int] `Size`: Size of the phantom.  
 > ![int] `AX`  
 > ![int] `AY`  
 > ![int] `AZ`  
 
-### Pig
+### Pig  
 > ![byte] `Saddle`: If true, the pig is equipped with a saddle.  
 
-### Rabbit
+### Rabbit  
 > ![int] `RabbitType`: Type of the rabbit (`0` is brown, `1` is white, `2` is black, `3` is spotted, `4` is creamy beige, `5` is dark brown, `99` is killer bunny).  
 
-### Sheep
+### Sheep  
 > ![byte] `Sheared`: If true, the sheep is sheared.  
 > ![byte] `Color`: Color of the sheep's wool (`0` is white, `1` is orange, `2` is magenta, `3` is light blue, `4` is yellow, `5` is lime, `6` is pink, `7` is gray, `8` is light gray, `9` is cyan, `10` is purple, `11` is blue, `12` is brown, `13` is green, `14` is red, `15` is black).  
 
-### Shulker
+### Shulker  
 > ![byte] `Peek`  
-> ![byte] `AttachFace`: Direction the shulker is facing (`0` is up, `1` is down, `2` is south, `3` is north, `4` is east, `5` is west).  > ![byte] `Color`: Color of the shulker (`0` is white, `1` is orange, `2` is magenta, `3` is light blue, `4` is yellow, `5` is lime, `6` is pink, `7` is gray, `8` is light gray, `9` is cyan, `10` is purple, `11` is blue, `12` is brown, `13` is green, `14` is red, `15` is black, `16` is default).  
+> ![byte] `AttachFace`: Direction the shulker is facing (`0` is up, `1` is down, `2` is south, `3` is north, `4` is east, `5` is west).  
+> ![byte] `Color`: Color of the shulker (`0` is white, `1` is orange, `2` is magenta, `3` is light blue, `4` is yellow, `5` is lime, `6` is pink, `7` is gray, `8` is light gray, `9` is cyan, `10` is purple, `11` is blue, `12` is brown, `13` is green, `14` is red, `15` is black, `16` is default).  
 > ![int] `APX`  
 > ![int] `APY`  
 > ![int] `APZ`  
 
-### Skeleton Horse
+### Skeleton Horse  
 > ![byte] `SkeletonTrap`: If true, the horse will spawn four horsemen when approached.  
 > ![byte] `SkeletonTrapTime`: Ticks the trap horse has existed for.  
 
-### Slime
+### Slime  
 > ![int] `Size`: Size of the slime.  
 > ![byte] `wasOnGround`: True when the slime is touching the ground.  
 
-### Snow Golem
+### Snow Golem  
 > ![byte] `Pumpkin`: If true, the snow golem has a pumpkin on its head.  
 
-### Turtle
+### Turtle  
 > ![int] `HomePosX`  
 > ![int] `HomePosY`  
 > ![int] `HomePosZ`  
@@ -208,13 +209,13 @@
 > ![int] `TravelPosY`  
 > ![int] `TravelPosZ`  
 
-### Vex
+### Vex  
 > ![int] `BoundX`: X coordinate of the vex's summon location where it will wander.  
 > ![int] `BoundY`: Y coordinate of the vex's summon location where it will wander.  
 > ![int] `BoundZ`: Z coordinate of the vex's summon location where it will wander.  
 > ![int] `LifeTicks`: Ticks remaining until the vex takes natural damage.  
 
-### Villager
+### Villager  
 > ![int] `Profession`: Cloak color of the villager (`0` is farmer, `1` is librarian, `2` is cleric, `3` is blacksmith, `4` is butcher, `5` is nitwit).  
 > ![int] `Career`  
 > ![int] `CareerLevel`  
@@ -230,30 +231,30 @@
 > > > > ![compound] `buyB`: Second item requested.  
 > > > > ![compound] `sell`: Item produced by the villager.  
 
-### Iron Golem
+### Iron Golem  
 > ![byte] `PlayerCreated`: If true, the iron golem will not attack players.  
 
-### Vindicator
+### Vindicator  
 > ![byte] `Johnny`: If true, the vindicator will attack all mobs.  
 
-### Wither
+### Wither  
 > ![int] `Invul`: Ticks remaining until the wither finishes its spawn animation.  
 
-### Wolf
+### Wolf  
 > ![byte] `Angry`: True when the wolf is hostile.  
 > ![byte] `CollarColor`: Color of the wolf's collar (`0` is white, `1` is orange, `2` is magenta, `3` is light blue, `4` is yellow, `5` is lime, `6` is pink, `7` is gray, `8` is light gray, `9` is cyan, `10` is purple, `11` is blue, `12` is brown, `13` is green, `14` is red, `15` is black).  
 
-### Zombie Pigman
+### Zombie Pigman  
 > ![short] `Anger`: Ticks remaining until the zombie pigman becomes neutral.  
 > ![string] `HurtBy`: Hexadecimal UUID of the player that most recently hurt the zombie pigman.  
 
-### Zombie Villager
+### Zombie Villager  
 > ![int] `Profession`: Cloak color of the zombie villager (`0` is farmer, `1` is librarian, `2` is cleric, `3` is blacksmith, `4` is butcher, `5` is nitwit).  
 > ![int] `ConversionTime`: Ticks remaining until the zombie villager transforms into a villager.  
 > ![long] `ConversionPlayerMost`: Most significant UUID bits of the player that cured the zombie villager.  
 > ![long] `ConversionPlayerLeast`: Least significant UUID bits of the player that cured the zombie villager.  
 
-### Arrow
+### Arrow  
 > ![int] `xTile`: X coordinate of the block the arrow is stuck in.  
 > ![int] `yTile`: Y coordinate of the block the arrow is stuck in.  
 > ![int] `zTile`: Z coordinate of the block the arrow is stuck in.  
@@ -268,7 +269,7 @@
 > ![list] `CustomPotionEffects`: List of status effects applied by the arrow.  
 > ![int] `Color`: RGB color of the arrow's particles.  
 
-### Item
+### Item  
 > ![short] `Age`: Ticks the dropped item has existed for. Does not increase when set to `-32768`.  
 > ![short] `Health`: Health of the dropped item. It dies when this reaches zero.  
 > ![short] `PickupDelay`: Ticks remaining until the dropped item can be picked up. Does not decrease when set to `32767`.  
@@ -282,43 +283,43 @@
 >
 > ![compound] `Item`: The item.  
 
-### Experience Orb
+### Experience Orb  
 > ![short] `Age`: Ticks the orb has existed for. Does not increase when set to `-32768`.  
 > ![byte] `Health`: Health of the orb. It dies when this reaches zero.  
 > ![short] `Value`: The number of experience points obtained when the orb is collected.  
 
-### Boat
+### Boat  
 > ![string] `Type`: Type of the boat (`oak`, `spruce`, `birch`, `jungle`, `acacia,` `dark_oak`).  
 
-### Minecarts
+### Minecarts  
 > ![byte] `CustomDisplayTile`: If true, the minecart will display a custom block.  
 > ![compound] `DisplayState`: Custom block displayed in the minecart.  
 > ![int] `DisplayOffset`  
 
-### Chest Minecart
+### Chest Minecart  
 > ![list] `Items`: List of items in the chest's inventory.  
 > ![string] `LootTable`: ID of the loot table used to fill contents.  
 > ![long] `LootTableSeed`: Seed for generating loot table results.  
 
-### Command Block Minecart
+### Command Block Minecart  
 > ![string] `Command`: Command entered in the command block.  
 > ![int] `SuccessCount`: Result of the previous command's output.  
 > ![string] `LastOutput`: JSON text component string of the previous command's output.  
 > ![byte] `TrackOutput`: If true, the command block will store its previous command output.  
 
-### Furnace Minecart
+### Furnace Minecart  
 > ![double] `PushX`  
 > ![double] `PushZ`  
 > ![short] `Fuel`: Ticks remaining until the furnace fuel is depleted.  
 
-### Hopper Minecart
+### Hopper Minecart  
 > ![list] `Items`: List of items in the hopper's inventory.  
 > ![string] `LootTable`: ID of the loot table used to fill contents.  
 > ![long] `LootTableSeed`: Seed for generating loot table results.  
 > ![int] `TransferCooldown`: Ticks remaining until the hopper can transfer an item.  
 > ![bool] `Enabled`: True when the hopper is not powered and can transfer items.  
 
-### Spawner Minecart
+### Spawner Minecart  
 > ![list] `SpawnPotentials`: List of possible entities to spawn.  
 > > ![compound] A possible entity.  
 > > > ![compound] `Entity`: An entity compound.  
@@ -333,10 +334,10 @@
 > ![short] `MaxNearbyEntities`: Maximum number of similar entities allowed nearby before spawning.  
 > ![short] `RequiredPlayerRange`: Maximum distance in meters a player must be for spawning.  
 
-### TNT Minecart
+### TNT Minecart  
 > ![int] `TNTFuse`: Ticks remaining until the TNT explodes.  
 
-### Falling Block
+### Falling Block  
 > ![compound] `BlockState`: Block that is falling.  
 > ![compound] `TileEntityData`: Block entity data for the block.  
 > ![int] `Time`: Ticks the block has existed for.  
@@ -345,10 +346,10 @@
 > ![int] `FallHurtMax`  
 > ![float] `FallHurtAmount`  
 
-### TNT
+### TNT  
 > ![short] `Fuse`: Ticks remaining until the TNT explodes.  
 
-### Area Effect Cloud
+### Area Effect Cloud  
 > ![int] `Age`: Ticks the cloud has existed for.  
 > ![int] `Color`: RGB color of the cloud's particles.  
 > ![int] `Duration`: Maximum `Age` of the cloud before it dies.  
@@ -364,7 +365,7 @@
 > ![string] `Potion`: ID of the potion effect applied by the cloud.  
 > ![list] `CustomPotionEffects`: List of status effects applied by the cloud.  
 
-### Armor Stand
+### Armor Stand  
 > ![int] `DisabledSlots`  
 > ![byte] `Marker`: If true, the armor stand will have no hitbox.  
 > ![byte] `Invisible`: If true, the armor stand will be invisible.  
@@ -402,20 +403,20 @@
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
 
-### Ender Crystal
+### Ender Crystal  
 > ![byte] `ShowBottom`: If true, the bedrock bottom will display.  
 > ![compound] `BeamTarget`: The block targeted by the beam.  
 > > ![int] `X`: X coordinate of the block.  
 > > ![int] `Y`: Y coordinate of the block.  
 > > ![int] `Z`: Z coordinate of the block.  
 
-### Evocation Fangs
+### Evocation Fangs  
 > ![int] `Warmup`: Ticks remaining until the fangs appear.  
 > ![int] `OwnerUUIDMost`: Most significant UUID bits of the fangs' owner.  
 > ![int] `OwnerUUIDLeast`: Least significant UUID bits of the fangs' owner.  
 
-### Fireworks Rocket
+### Fireworks Rocket  
 > ![int] `Life`: Ticks the rocket has existed for.  
 > ![int] `LifeTime`: Maximum `Life` of the rocket before it explodes.  
 > ![compound] `FireworksItem`: Fireworks rocket item.  
-
+  
