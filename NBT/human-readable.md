@@ -91,7 +91,7 @@
 
 ### Breedable Mobs  
 > ![int] **`InLove`**: Ticks remaining until the mob stops attempting to breed.  
-> ![int] **`Age`**: When positive, Ticks remaining until the mob can breed again. When negative, Ticks remaining until the mob becomes an adult.  
+> ![int] **`Age`**: When positive, ticks remaining until the mob can breed again. When negative, ticks remaining until the mob becomes an adult.  
 > ![int] **`ForcedAge`**: The value `Age` will be set to when the mob becomes an adult.  
 > ![long] **`LoveCauseMost`**: Most significant UUID bits of the player that bred the mob.  
 > ![long] **`LoveCauseLeast`**: Least significant UUID bits of the player that bred the mob.  
