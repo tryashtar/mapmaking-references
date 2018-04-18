@@ -8,44 +8,63 @@
 [list]: https://i.imgur.com/oRRFndw.png "List"
 [compound]: https://i.imgur.com/NeqiPhl.png "Compound"
 
+---
+
+![byte] **Byte**: `-128 .. 127`, ends with `b`.  
+![short] **Short**: `-32768 .. 32767`, ends with `s`.  
+![int] **Int**: `-2147483648 .. 2147483647`.  
+![long] **Long**: `-9223372036854775808 .. 9223372036854775807`, ends with `L`.  
+![float] **Float**: Any real number, ends with `f`.  
+![double] **Double**: Any real number, ends with `d`.  
+![string] **String**: Text wrapped in quotes.  
+![list] **List**: Unnamed values between square brackets.  
+![compound] **Compound**: Named values between curly brackets.  
+
+---
+
+👁 **Read-only**: Modifying this tag on an entity will have no effect.  
+✨ **Custom**: The game will not naturally change this tag.  
+
+---
+
 ### Entity  
-> ![string] **`id`**: Entity ID.  
+> ![string] **`id`**: 👁 Entity ID.  
 > ![list] **`Pos`**: Location of the entity.  
 > > ![double] X coordinate.  
 > > ![double] Y coordinate.  
 > > ![double] Z coordinate.  
 >
-> ![list] **`Motion`**: Velocity of the entity in meters per tick.  
+> ![list] **`Motion`**: Velocity of the entity in meters per tick. Each must fall within `-10 .. 10`.  
 > > ![double] X component.  
 > > ![double] Y component.  
 > > ![double] Z component.  
 >
 > ![list] **`Rotation`**: Rotation of the entity.  
-> > ![float] Clockwise rotation around Y axis (yaw).  
-> > ![float] Declination from the horizon around X axis (pitch).  
+> > ![float] Clockwise rotation around Y axis (yaw). `0` is south, `90` is west, `180` is north, `270` is east. Must fall within `0 .. 360`.  
+> > ![float] Declination from the horizon around X axis (pitch). `-90` is straight up, `0` is forward, `90` is straight down. Must fall within `-90 .. 90`. 
 >
-> ![float] **`FallDistance`**: Distance in meters the entity has fallen. Determines fall damage.  
-> ![short] **`Fire`**: Ticks remaining while the entity is on fire.  
-> ![short] **`Air`**: Ticks remaining of breath while the entity is underwater.  
-> ![byte] **`OnGround`**: True when the entity is touching the ground.  
-> ![byte] **`NoGravity`**: If true, the entity will not move.  
-> ![int] **`Dimension`**: Current dimension of the entity (`0` is Overworld, `-1` is The Nether, `1` is The End).  
-> ![byte] **`Invulnerable`**: If true, the entity is immune to damage.  
+> ![float] **`FallDistance`**: Distance in meters the entity has fallen. When the entity lands, the entity takes fall damage equal to `FallDistance - 3` and this resets to zero.  
+> ![short] **`Fire`**: Ticks remaining while the entity is on fire. When not on fire, this is set to `-1` (`-20` for players).  
+> ![short] **`Air`**: Ticks remaining of breath while the entity is underwater. When air is full, this is set to `300` (`4800` for dolphins).  
+> ![byte] **`OnGround`**: 👁 True when the entity is touching the ground.  
+> ![byte] **`NoGravity`**: ✨ If true, the entity will not move.  
+> ![int] **`Dimension`**: 👁 Current dimension of the entity. `0` is Overworld, `-1` is The Nether, `1` is The End.  
+> ![byte] **`Invulnerable`**: ✨ If true, the entity is immune to damage.  
 > ![int] **`PortalCooldown`**: Ticks remaining until the entity can move through portals.  
-> ![long] **`UUIDMost`**: Most significant bits of the entity's Universally Unique Identifier.  
-> ![long] **`UUIDLeast`**: Least significant bits of the entity's Universally Unique Identifier.  
+> ![long] **`UUIDMost`**: 👁 Most significant bits of the entity's Universally Unique Identifier.  
+> ![long] **`UUIDLeast`**: 👁 Least significant bits of the entity's Universally Unique Identifier.  
 > ![string] **`CustomName`**: JSON text component string of the entity's custom name.  
-> ![byte] **`CustomNameVisible`**: If true, the entity's name will appear as a permanent nameplate.  
-> ![byte] **`Silent`**: If true, the entity will not make sounds.  
-> ![list] **`Passengers`**: List of entity compounds that are riding on this entity.  
-> ![byte] **`Glowing`**: If true, the entity will show a glowing outline.  
-> ![list] **`Tags`**: List of custom strings.  
+> ![byte] **`CustomNameVisible`**: ✨ If true, the entity's name will appear as a permanent nameplate.  
+> ![byte] **`Silent`**: ✨ If true, the entity will not make sounds.  
+> ![list] **`Passengers`**: 👁 List of entities that are riding on the entity.  
+> ![byte] **`Glowing`**: ✨ If true, the entity will show a glowing outline.  
+> ![list] **`Tags`**: ✨ List of custom strings.  
 
 ### Mob/Player  
 > ![float] **`Health`**: Amount of health the mob has, in half-hearts.  
-> ![float] **`AbsorptionAmount`**  
-> ![short] **`HurtTime`**: Ticks remaining until the mob finishes its hurt animation.  
-> ![short] **`DeathTime`**: Ticks during which the mob has been dead.  
+> ![float] **`AbsorptionAmount`**: Amount of yellow absorption health the mob has, in half-hearts.  
+> ![short] **`HurtTime`**: 👁 Ticks remaining until the mob finishes its hurt animation.  
+> ![short] **`DeathTime`**: 👁 Ticks during which the mob has been dead.  
 > ![byte] **`FallFlying`**: True when the mob is flying with elytra.  
 > ![list] **`Attributes`**: List of attributes for this mob.  
 > > ![compound] An attribute.  
@@ -55,33 +74,33 @@
 >
 > ![list] **`ActiveEffects`**: List of active status effects.  
 >
-> ![list] **`HandItems`**: Items in the mob's hands.  
+> ![list] **`HandItems`**: Items in the mob's hands. Empty slots exist as empty compounds.  
 > > ![compound] Item in the mob's main hand.  
 > > ![compound] Item in the mob's off hand.  
 >
-> ![list] **`ArmorItems`**: Items in the mob's armor slots.  
+> ![list] **`ArmorItems`**: Items in the mob's armor slots. Empty slots exist as empty compounds.  
 > > ![compound] Item in the mob's feet slot.  
 > > ![compound] Item in the mob's legs slot.  
 > > ![compound] Item in the mob's chest slot.  
 > > ![compound] Item in the mob's head slot.  
 >
-> ![list] **`HandDropChances`**: Chances that hand items will drop on death.  
+> ![list] **`HandDropChances`**: Proportion chance that hand items will drop on death. Each defaults to `0.085` (`2.0` for picked up items that should not randomize durability).  
 > > ![float] Chance that the main hand item will drop.  
 > > ![float] Chance that the off hand item will drop.  
 >
-> ![list] **`ArmorDropChances`**: Chances that armor items will drop on death.  
+> ![list] **`ArmorDropChances`**: Chances that armor items will drop on death. Each defaults to `0.085` (`2.0` for picked up items that should not randomize durability).   
 > > ![float] Chance that the feet slot item will drop on death.  
 > > ![float] Chance that the legs slot item will drop on death.  
 > > ![float] Chance that the chest slot item will drop on death.  
 > > ![float] Chance that the head slot item will drop on death.  
 >
-> ![string] **`DeathLootTable`**: ID of the loot table used for mob drops on death.  
-> ![long] **`DeathLootTableSeed`**: Seed for generating loot table results.  
-> ![byte] **`CanPickUpLoot`**: If true, the mob can equip weapons and armor from the ground.  
-> ![byte] **`NoAI`**: If true, the mob will not move or make any AI actions.  
+> ![string] **`DeathLootTable`**: ✨ ID of the loot table used for mob drops on death.  
+> ![long] **`DeathLootTableSeed`**: ✨ Seed for generating loot table results.  
+> ![byte] **`CanPickUpLoot`**: If true, the mob can equip weapons and armor from the ground when the `mobGriefing` gamerule is true.  
+> ![byte] **`NoAI`**: ✨ If true, the mob will not move or make any AI actions.  
 > ![byte] **`PersistenceRequired`**: If true, the mob will not naturally despawn.  
 > ![byte] **`LeftHanded`**: If true, the mob will hold its main item in its left hand.  
-> ![byte] **`Leashed`**: True when the mob is attached to a lead.  
+> ![byte] **`Leashed`**: 👁 True when the mob is attached to a lead.  
 > ![compound] **`Leash`**: The entity or fence coordinate the mob is leashed to.  
 > > ![long] **`UUIDMost`**: Most significant UUID bits of the attached entity.  
 > > ![long] **`UUIDLeast`**: Least significant UUID bits of the attached entity.  
@@ -90,8 +109,8 @@
 > > ![int] **`Z`**: Z coordinate of the fence.  
 
 ### Breedable Mobs  
-> ![int] **`InLove`**: Ticks remaining until the mob stops attempting to breed.  
-> ![int] **`Age`**: When positive, ticks remaining until the mob can breed again. When negative, ticks remaining until the mob becomes an adult.  
+> ![int] **`InLove`**: Ticks remaining until the mob stops attempting to breed. When breeding starts, this is set to `600`.  
+> ![int] **`Age`**: When positive, ticks remaining until the mob can breed again. When negative, ticks remaining until the mob becomes an adult. `0` is an adult that can breed, `6000` is an adult that just finished breeding, `-24000` is a newborn baby.  
 > ![int] **`ForcedAge`**: The value `Age` will be set to when the mob becomes an adult.  
 > ![long] **`LoveCauseMost`**: Most significant UUID bits of the player that bred the mob.  
 > ![long] **`LoveCauseLeast`**: Least significant UUID bits of the player that bred the mob.  
@@ -103,7 +122,7 @@
 ### Horses, Donkeys, Mules, Llamas  
 > ![byte] **`EatingHaystack`**: True when the mob is grazing.  
 > ![byte] **`Tame`**: If true, the mob has been tamed.  
-> ![int] **`Temper`**: Ease of taming. Increases when the mob is ridden or fed.  
+> ![int] **`Temper`**: Ease of taming. Increases when the mob is ridden or fed. Naturally falls within `0 .. 100`.  
 > ![string] **`OwnerUUID`**: Hexadecimal UUID of the player that owns the mob.  
 > ![compound] **`SaddleItem`**: The saddle item worn by the mob.  
 
@@ -146,7 +165,7 @@
 
 ### Horse  
 > ![compound] **`ArmorItem`**: The horse armor item worn by the horse.  
-> ![int] **`Variant`  
+> ![int] **`Variant`**  
 
 ### Illusioner  
 > ![int] **`SpellTicks`**: Ticks remaining until a spell can be cast.  
@@ -161,10 +180,10 @@
 > ![byte] **`wasOnGround`**: True when the magma cube is touching the ground.  
 
 ### Ocelot  
-> ![int] **`CatType`**: Type of the cat (`0` is wild, **`1` is tuxedo, **`2` is tabby, **`3` is siamese).  
+> ![int] **`CatType`**: Type of the cat (`0` is wild, `1` is tuxedo, `2` is tabby, `3` is siamese).  
 
 ### Parrot  
-> ![int] **`Variant`**: Color of the parrot (`0` is red, **`1` is blue, **`2` is green, **`3` is cyan, **`4` is silver).  
+> ![int] **`Variant`**: Color of the parrot (`0` is red, `1` is blue, `2` is green, `3` is cyan, `4` is silver).  
 
 ### Phantom  
 > ![int] **`Size`**: Size of the phantom.  
@@ -289,12 +308,12 @@
 > ![short] **`Value`**: The number of experience points obtained when the orb is collected.  
 
 ### Boat  
-> ![string] **`Type`**: Type of the boat (`oak`, **`spruce`, **`birch`, **`jungle`, **`acacia,` **`dark_oak`).  
+> ![string] **`Type`**: Type of the boat (`oak`, `spruce`, `birch`, `jungle`, `acacia,` `dark_oak`).  
 
 ### Minecarts  
 > ![byte] **`CustomDisplayTile`**: If true, the minecart will display a custom block.  
 > ![compound] **`DisplayState`**: Custom block displayed in the minecart.  
-> ![int] **`DisplayOffset`  
+> ![int] **`DisplayOffset`**  
 
 ### Chest Minecart  
 > ![list] **`Items`**: List of items in the chest's inventory.  
@@ -317,7 +336,7 @@
 > ![string] **`LootTable`**: ID of the loot table used to fill contents.  
 > ![long] **`LootTableSeed`**: Seed for generating loot table results.  
 > ![int] **`TransferCooldown`**: Ticks remaining until the hopper can transfer an item.  
-> ![bool] **`Enabled`**: True when the hopper is not powered and can transfer items.  
+> ![byte] **`Enabled`**: True when the hopper is not powered and can transfer items.  
 
 ### Spawner Minecart  
 > ![list] **`SpawnPotentials`**: List of possible entities to spawn.  
@@ -344,7 +363,7 @@
 > ![byte] **`DropItem`**: If true, the block will produce an item when it breaks.  
 > ![byte] **`HurtEntities`**: If true, the block will damage entities it lands on.  
 > ![int] **`FallHurtMax`**  
-> ![float] **`FallHurtAmount`  
+> ![float] **`FallHurtAmount`**  
 
 ### TNT  
 > ![short] **`Fuse`**: Ticks remaining until the TNT explodes.  
@@ -377,27 +396,27 @@
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
->
+> >
 > > ![list] **`Head`**: Head rotation.  
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
->
+> >
 > > ![list] **`LeftArm`**: Left arm rotation.  
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
->
+> >
 > > ![list] **`RightArm`**: Right arm rotation.  
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
->
+> >
 > > ![list] **`LeftLeg`**: Left leg rotation.  
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
 > > > ![float] Z rotation.  
->
+> >
 > > ![list] **`RightLeg`**: Right leg rotation.  
 > > > ![float] X rotation.  
 > > > ![float] Y rotation.  
