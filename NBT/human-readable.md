@@ -1,12 +1,12 @@
-[byte]: https://i.imgur.com/cXHccQS.png "Byte"
-[short]: https://i.imgur.com/rireehT.png "Short"
-[int]: https://i.imgur.com/02KlQEx.png "Int"
-[long]: https://i.imgur.com/UJwhcS1.png "Long"
-[float]: https://i.imgur.com/iUxlS14.png "Float"
-[double]: https://i.imgur.com/ohTfAW4.png "Double"
-[string]: https://i.imgur.com/fm3DXhX.png "String"
-[list]: https://i.imgur.com/oRRFndw.png "List"
-[compound]: https://i.imgur.com/NeqiPhl.png "Compound"
+[byte]: https://i.imgur.com/bjqfZyA.png "Byte"
+[short]: https://i.imgur.com/io2beuU.png "Short"
+[int]: https://i.imgur.com/p9oApza.png "Int"
+[long]: https://i.imgur.com/J5syxPr.png "Long"
+[float]: https://i.imgur.com/OyOLfNY.png "Float"
+[double]: https://i.imgur.com/VtWZquK.png "Double"
+[string]: https://i.imgur.com/jD49RLm.png "String"
+[compound]: https://i.imgur.com/G66Yglg.png "Compound"
+[list]: https://i.imgur.com/nY8RVer.png "List"
 
 ---
 
@@ -17,54 +17,76 @@
 ![float] **Float**: Any real number, ends with `f`.  
 ![double] **Double**: Any real number, ends with `d`.  
 ![string] **String**: Text wrapped in quotes.  
-![list] **List**: Unnamed values between square brackets.  
 ![compound] **Compound**: Named values between curly brackets.  
-
----
-
-👁 **Read-only**: Modifying this tag on an entity will have no effect.  
-✨ **Custom**: The game will not naturally change this tag.  
+![list] **List**: Unnamed values of the same type between square brackets.  
 
 ---
 
 ### Entity  
-> ![string] **`id`**: 👁 Entity ID.  
+> ![string] **`id`**: Entity ID. Changing this with commands will have no effect.  
 > ![list] **`Pos`**: Location of the entity.  
 > > ![double] X coordinate.  
 > > ![double] Y coordinate.  
 > > ![double] Z coordinate.  
 >
-> ![list] **`Motion`**: Velocity of the entity in meters per tick. Each must fall within `-10 .. 10`.  
+> ![list] **`Motion`**: Velocity of the entity in meters per tick. Each will be reset to `0` if it falls outside `-10 .. 10`.  
 > > ![double] X component.  
 > > ![double] Y component.  
 > > ![double] Z component.  
 >
 > ![list] **`Rotation`**: Rotation of the entity.  
-> > ![float] Clockwise rotation around Y axis (yaw). `0` is south, `90` is west, `180` is north, `270` is east. Must fall within `0 .. 360`.  
-> > ![float] Declination from the horizon around X axis (pitch). `-90` is straight up, `0` is forward, `90` is straight down. Must fall within `-90 .. 90`. 
+> > ![float] Clockwise rotation around Y axis (yaw). If modified, will be moduloed to fall within `0 .. 360`.   
+> > • `0`: facing south  
+> > • `90`: facing west  
+> > • `180`: facing north  
+> > • `270`: facing east  
+> >
+> > ![float] Declination from the horizon around X axis (pitch). If modified, will be moduloed to fall within `-360 .. 360`. Naturally falls within `-90 .. 90`.  
+> > • `-90`: facing straight up  
+> > • `0`: facing forward  
+> > • `90`: facing straight down  
+> >
+> ![float] **`FallDistance`**: Distance in meters the entity has fallen. When the entity lands, the entity takes fall damage equal to `FallDistance - 3` and this resets to `0`.  
+> ![short] **`Fire`**: Ticks remaining while the entity is on fire.  
+> • `-20`: not on fire (players)  
+> • `-1`: not on fire (entities)  
 >
-> ![float] **`FallDistance`**: Distance in meters the entity has fallen. When the entity lands, the entity takes fall damage equal to `FallDistance - 3` and this resets to zero.  
-> ![short] **`Fire`**: Ticks remaining while the entity is on fire. When not on fire, this is set to `-1` (`-20` for players).  
-> ![short] **`Air`**: Ticks remaining of breath while the entity is underwater. When air is full, this is set to `300` (`4800` for dolphins).  
-> ![byte] **`OnGround`**: 👁 True when the entity is touching the ground.  
-> ![byte] **`NoGravity`**: ✨ If true, the entity will not move.  
-> ![int] **`Dimension`**: 👁 Current dimension of the entity. `0` is Overworld, `-1` is The Nether, `1` is The End.  
-> ![byte] **`Invulnerable`**: ✨ If true, the entity is immune to damage.  
+> ![short] **`Air`**: Ticks remaining of breath while the entity is underwater.  
+> • `0`: drowning  
+> • `300`: full air  
+> • `4800`: full air (dolphins)  
+>
+> ![byte] **`OnGround`**: True when the entity is touching the ground.  
+> ![byte] **`NoGravity`**: If true, the entity will not move.  
+> ![int] **`Dimension`**: Current dimension of the entity.  
+> • `-1`: in The Nether  
+> • `0`: in Overworld  
+> • `1`: in The End  
+>  
+> ![byte] **`Invulnerable`**: If true, the entity is immune to damage.  
 > ![int] **`PortalCooldown`**: Ticks remaining until the entity can move through portals.  
-> ![long] **`UUIDMost`**: 👁 Most significant bits of the entity's Universally Unique Identifier.  
-> ![long] **`UUIDLeast`**: 👁 Least significant bits of the entity's Universally Unique Identifier.  
+> • `0`: ready to teleport  
+> • `300`: recently teleported  
+>
+> ![long] **`UUIDMost`**: Most significant bits of the entity's Universally Unique Identifier. Changing this with commands will have no effect.  
+> ![long] **`UUIDLeast`**: Least significant bits of the entity's Universally Unique Identifier. Changing this with commands will have no effect.  
 > ![string] **`CustomName`**: JSON text component string of the entity's custom name.  
-> ![byte] **`CustomNameVisible`**: ✨ If true, the entity's name will appear as a permanent nameplate.  
-> ![byte] **`Silent`**: ✨ If true, the entity will not make sounds.  
-> ![list] **`Passengers`**: 👁 List of entities that are riding on the entity.  
-> ![byte] **`Glowing`**: ✨ If true, the entity will show a glowing outline.  
-> ![list] **`Tags`**: ✨ List of custom strings.  
+> ![byte] **`CustomNameVisible`**: If true, the entity's name will appear as a permanent nameplate.  
+> ![byte] **`Silent`**: If true, the entity will not make sounds.  
+> ![list] **`Passengers`**: List of entities that are riding on the entity Changing this with commands will have no effect.  
+> ![byte] **`Glowing`**: If true, the entity will show a glowing outline.  
+> ![list] **`Tags`**: List of custom strings applied by `/tag`.  
 
 ### Mob/Player  
-> ![float] **`Health`**: Amount of health the mob has, in half-hearts.  
-> ![float] **`AbsorptionAmount`**: Amount of yellow absorption health the mob has, in half-hearts.  
-> ![short] **`HurtTime`**: 👁 Ticks remaining until the mob finishes its hurt animation.  
-> ![short] **`DeathTime`**: 👁 Ticks during which the mob has been dead.  
+> ![float] **`Health`**: Amount of health the mob has, in half-hearts. Cannot exceed the mob's `generic.maxHealth` attribute.  
+> ![float] **`AbsorptionAmount`**: Amount of yellow absorption health the mob has, in half-hearts. Damage is applied to this health first.  
+> ![short] **`HurtTime`**: Ticks remaining until the mob finishes its hurt animation.  
+> ![short] **`DeathTime`**: Ticks during which the mob has been playing its death animation.  
+> • `.. -80`: no experience will drop  
+> • `-80 .. 0`: experience will drop later  
+> • `0 .. 19`: experience will drop earlier  
+> • `20 ..`: no experience will drop
+>
 > ![byte] **`FallFlying`**: True when the mob is flying with elytra.  
 > ![list] **`Attributes`**: List of attributes for this mob.  
 > > ![compound] An attribute.  
@@ -84,24 +106,24 @@
 > > ![compound] Item in the mob's chest slot.  
 > > ![compound] Item in the mob's head slot.  
 >
-> ![list] **`HandDropChances`**: Proportion chance that hand items will drop on death. Each defaults to `0.085` (`2.0` for picked up items that should not randomize durability).  
+> ![list] **`HandDropChances`**: Proportion chances that armor items will drop on death. Each defaults to `0.085` and is set to `2.0` when an item is picked up. When greater than `1.0`, durability will not be randomized.  
 > > ![float] Chance that the main hand item will drop.  
 > > ![float] Chance that the off hand item will drop.  
 >
-> ![list] **`ArmorDropChances`**: Chances that armor items will drop on death. Each defaults to `0.085` (`2.0` for picked up items that should not randomize durability).   
+> ![list] **`ArmorDropChances`**: Proportion chances that armor items will drop on death. Each defaults to `0.085` and is set to `2.0` when an item is picked up. When greater than `1.0`, durability will not be randomized.   
 > > ![float] Chance that the feet slot item will drop on death.  
 > > ![float] Chance that the legs slot item will drop on death.  
 > > ![float] Chance that the chest slot item will drop on death.  
 > > ![float] Chance that the head slot item will drop on death.  
 >
-> ![string] **`DeathLootTable`**: ✨ ID of the loot table used for mob drops on death.  
-> ![long] **`DeathLootTableSeed`**: ✨ Seed for generating loot table results.  
+> ![string] **`DeathLootTable`**: ID of the custom loot table used for mob drops on death.  
+> ![long] **`DeathLootTableSeed`**: Seed for generating custom loot table results.  
 > ![byte] **`CanPickUpLoot`**: If true, the mob can equip weapons and armor from the ground when the `mobGriefing` gamerule is true.  
-> ![byte] **`NoAI`**: ✨ If true, the mob will not move or make any AI actions.  
+> ![byte] **`NoAI`**: If true, the mob will not move or make any AI actions.  
 > ![byte] **`PersistenceRequired`**: If true, the mob will not naturally despawn.  
 > ![byte] **`LeftHanded`**: If true, the mob will hold its main item in its left hand.  
-> ![byte] **`Leashed`**: 👁 True when the mob is attached to a lead.  
-> ![compound] **`Leash`**: The entity or fence coordinate the mob is leashed to.  
+> ![byte] **`Leashed`**: True when the mob is attached to a lead.  
+> ![compound] **`Leash`**: The entity or fence coordinate the mob is leashed to. If `Leashed` is false, the connection will be purely visible and will not restrict the mob or break.  
 > > ![long] **`UUIDMost`**: Most significant UUID bits of the attached entity.  
 > > ![long] **`UUIDLeast`**: Least significant UUID bits of the attached entity.  
 > > ![int] **`X`**: X coordinate of the fence.  
@@ -109,9 +131,16 @@
 > > ![int] **`Z`**: Z coordinate of the fence.  
 
 ### Breedable Mobs  
-> ![int] **`InLove`**: Ticks remaining until the mob stops attempting to breed. When breeding starts, this is set to `600`.  
-> ![int] **`Age`**: When positive, ticks remaining until the mob can breed again. When negative, ticks remaining until the mob becomes an adult. `0` is an adult that can breed, `6000` is an adult that just finished breeding, `-24000` is a newborn baby.  
-> ![int] **`ForcedAge`**: The value `Age` will be set to when the mob becomes an adult.  
+> ![int] **`InLove`**: Ticks remaining until the mob stops attempting to breed.  
+> • `0`: not trying to breed  
+> • `600`: recently fed  
+>
+> ![int] **`Age`**: When positive, ticks remaining until the mob can breed again. When negative, ticks remaining until the mob becomes an adult.  
+> • `-24000`: newborn baby  
+> • `0`: adult that can breed  
+> • `6000`: adult that just finished breeding  
+>
+> ![int] **`ForcedAge`**: The value `Age` will be set to when the mob grows up by eating.  
 > ![long] **`LoveCauseMost`**: Most significant UUID bits of the player that bred the mob.  
 > ![long] **`LoveCauseLeast`**: Least significant UUID bits of the player that bred the mob.  
 
