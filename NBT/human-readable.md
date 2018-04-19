@@ -85,7 +85,7 @@
 > • `.. -80`: no experience will drop  
 > • `-80 .. 0`: experience will drop later  
 > • `0 .. 19`: experience will drop earlier  
-> • `20 ..`: no experience will drop
+> • `20 ..`: after dying, the mob will be permanently invisible, uninteractable, and stuck in the world
 >
 > ![byte] **`FallFlying`**: True when the mob is flying with elytra.  
 > ![list] **`Attributes`**: List of attributes for this mob.  
